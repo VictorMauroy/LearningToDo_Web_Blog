@@ -1,7 +1,16 @@
+using Learning_Blog.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<LearningBlogDbContext>(
+    options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("LearnBlogCreationDbConnectionString")
+    )
+);
 
 var app = builder.Build();
 
